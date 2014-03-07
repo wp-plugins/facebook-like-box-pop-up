@@ -93,15 +93,14 @@ For more information visit <a href="http://arturssmirnovs.com/" target="_blank">
 <h3>Like Box Settings</h3>
 <table class="form-table">
 <tr valign="top">
-<th scope="row">Title</th>
-<td><input type="text" name="facebook_like_box_title" value="<?php echo get_option('facebook_like_box_title'); ?>" /></td>
-</tr>
+<th scope="row">Facebook Page Title</th>
+<td>http://facebook.com/<input type="text" name="facebook_like_box_title" value="<?php echo get_option('facebook_like_box_title'); ?>" />/</td></tr>
 <tr valign="top">
-<th scope="row">Width</th>
+<th scope="row">Box Width</th>
 <td><input type="text" name="facebook_like_box_width" value="<?php echo get_option('facebook_like_box_width'); ?>" />px</td>
 </tr>
 <tr valign="top">
-<th scope="row">Height</th>
+<th scope="row">Box Height</th>
 <td><input type="text" name="facebook_like_box_height" value="<?php echo get_option('facebook_like_box_height'); ?>" />px</td>
 </tr>
 <?php if (get_option('facebook_like_box_height') != 290 || get_option('facebook_like_box_width') != 400) { ?>
@@ -111,23 +110,23 @@ For more information visit <a href="http://arturssmirnovs.com/" target="_blank">
 </tr>
 <?php } ?>
 <tr valign="top">
-<th scope="row">Colorscheme</th>
+<th scope="row">Box Colorscheme</th>
 <td><select name="facebook_like_box_colorscheme"><option value="light" <?php if ('light'==get_option('facebook_like_box_colorscheme')) echo 'selected'; ?>>Light</option><option value="dark" <?php if ('dark'==get_option('facebook_like_box_colorscheme')) echo 'selected'; ?>>Dark</option></select></td>
 </tr>
 <tr valign="top">
-<th scope="row">Faces</th>
+<th scope="row">Enable Faces</th>
 <td><fieldset><label title="Show"><input type="radio" name="facebook_like_box_faces" value="true" <?php if ('true'==get_option('facebook_like_box_faces')) echo 'checked="checked"'; ?>>Show</label><br /><label title="Hide"><input type="radio" name="facebook_like_box_faces" value="false" <?php if ('false'==get_option('facebook_like_box_faces')) echo 'checked="checked"'; ?>>Hide</label><br /></fieldset></td>
 </tr>
 <tr valign="top">
-<th scope="row">Header</th>
+<th scope="row">Enable Header</th>
 <td><fieldset><label title="Show"><input type="radio" name="facebook_like_box_header" value="true" <?php if ('true'==get_option('facebook_like_box_header')) echo 'checked="checked"'; ?>>Show</label><br /><label title="Hide"><input type="radio" name="facebook_like_box_header" value="false" <?php if ('false'==get_option('facebook_like_box_header')) echo 'checked="checked"'; ?>>Hide</label><br /></fieldset></td>
 </tr>
 <tr valign="top">
-<th scope="row">Steam</th>
+<th scope="row">Enable Steam</th>
 <td><fieldset><label title="Show"><input type="radio" name="facebook_like_box_steam" value="true" <?php if ('true'==get_option('facebook_like_box_steam')) echo 'checked="checked"'; ?>>Show</label><br /><label title="Hide"><input type="radio" name="facebook_like_box_steam" value="false" <?php if ('false'==get_option('facebook_like_box_steam')) echo 'checked="checked"'; ?>>Hide</label><br /></fieldset></td>
 </tr>
 <tr valign="top">
-<th scope="row">Border</th>
+<th scope="row">Enable Border</th>
 <td><fieldset><label title="Show"><input type="radio" name="facebook_like_box_border" value="true" <?php if ('true'==get_option('facebook_like_box_border')) echo 'checked="checked"'; ?>>Show</label><br /><label title="Hide"><input type="radio" name="facebook_like_box_border" value="false" <?php if ('false'==get_option('facebook_like_box_border')) echo 'checked="checked"'; ?>>Hide</label><br /></fieldset></td>
 </tr>
 <tr valign="top">
