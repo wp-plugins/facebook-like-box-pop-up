@@ -14,10 +14,14 @@
 	position:fixed;
 	top: 50%;
 	left: 50%;
-	/*!!! If you have changed width or height check margin-top and margin-left values !!!*/
 	margin-top: -145px; /*Half of your settings height*/
 	margin-left: -200px; /*Half of your settings width*/
-	padding:15px;
+}
+
+#fb_box iframe {
+	display: block;
+	margin: 0;
+	padding: 0;
 }
 
 #fb_box.dark { 

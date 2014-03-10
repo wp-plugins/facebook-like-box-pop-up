@@ -2,9 +2,9 @@
 Contributors: arturssmirnovs
 Tags: facebook, like, box
 Donate link: http://arturssmirnovs.com/donate/
-Requires at least: 3.1
+Requires at least: 3.4
 Tested up to: 3.8.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,3 +33,7 @@ Visit plugin home page: http://arturssmirnovs.com/blog/facebook-like-box-wordpre
 == Changelog ==
 = 1.0 =
 * Initial release.
+= 1.1 =
+* Add mobile feature (Show, hide, width, height on mobile).
+* Add auto styles (No need to update styles.css file after width or height change).
+* Styles bug fix (box padding, iframe margin, display styles).
