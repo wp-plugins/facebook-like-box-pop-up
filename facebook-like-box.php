@@ -3,7 +3,7 @@
 Plugin Name: Facebook Like Box
 Plugin URI: http://arturssmirnovs.com/blog/facebook-like-box-wordpress/
 Description: Facebook like box for wordpress is plugin that allow you to customize facebook like box easily. This is very useful plugin for websites, communities that use facebook.
-Version: 1.1
+Version: 1.2
 Author: Arturs Smirnovs
 Author URI: http://arturssmirnovs.com/
 License: GPL2
@@ -32,21 +32,22 @@ function facebook_like_box_admin_menu() { //create menu //call register settings
 }
 
 function facebook_like_box_register_settings() { //register settings
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_title');
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_width' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_height' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_colorscheme' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_faces' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_header' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_steam' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_border' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_appid' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_settings_time_enable' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_settings_time' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_settings_overlay' );
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_settings_mobile' );	
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_settings_mobile_width' );	
-	register_setting( 'facebook-like-box-settings', 'facebook_like_box_settings_mobile_height' );	
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_title');
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_width' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_height' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_colorscheme' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_faces' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_header' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_steam' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_border' );
+	register_setting( 'facebook-like-box-settings-main', 'facebook_like_box_appid' );
+	register_setting( 'facebook-like-box-settings-view', 'facebook_like_box_settings_show' );
+	register_setting( 'facebook-like-box-settings-view', 'facebook_like_box_settings_time_enable' );
+	register_setting( 'facebook-like-box-settings-view', 'facebook_like_box_settings_time' );
+	register_setting( 'facebook-like-box-settings-view', 'facebook_like_box_settings_overlay' );
+	register_setting( 'facebook-like-box-settings-mobile', 'facebook_like_box_settings_mobile' );	
+	register_setting( 'facebook-like-box-settings-mobile', 'facebook_like_box_settings_mobile_width' );	
+	register_setting( 'facebook-like-box-settings-mobile', 'facebook_like_box_settings_mobile_height' );	
 }
 
 function facebook_like_box_activate() { //add default setting values on activation
@@ -59,6 +60,7 @@ function facebook_like_box_activate() { //add default setting values on activati
 	add_option( 'facebook_like_box_steam', 'false', '', 'yes' );
 	add_option( 'facebook_like_box_border', 'true', '', 'yes' );
 	add_option( 'facebook_like_box_appid', '', '', 'yes' );
+	add_option( 'facebook_like_box_settings_show', 'yes', '', 'yes' );
 	add_option( 'facebook_like_box_settings_time_enable', 'no', '', 'yes' );
 	add_option( 'facebook_like_box_settings_time', '3600', '', 'yes' );
 	add_option( 'facebook_like_box_settings_overlay', 'yes', '', 'yes' );
@@ -77,6 +79,7 @@ function facebook_like_box_deactivate() { //delete setting and values on deactiv
 	delete_option( 'facebook_like_box_steam' );
 	delete_option( 'facebook_like_box_border' );
 	delete_option( 'facebook_like_box_appid' );
+	delete_option( 'facebook_like_box_settings_show' );
 	delete_option( 'facebook_like_box_settings_time_enable' );
 	delete_option( 'facebook_like_box_settings_time' );
 	delete_option( 'facebook_like_box_settings_overlay' );
@@ -85,21 +88,29 @@ function facebook_like_box_deactivate() { //delete setting and values on deactiv
 	delete_option( 'facebook_like_box_settings_mobile_height' );
 }
 
-function facebook_like_box_settings() { //facebook like box settings page
+function facebook_like_box_settings() { //facebook like box settings page ?>
 
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have permissions to access this page.' ) );
-	}
+<div class="wrap">  
+<h2>Facebook Like Box Settings</h2>
 
-?><div class="wrap">
-<h2>Facebook Like Box</h2>
-<p>Facebook like box for wordpress is plugin that allow you to customize facebook like box easily.<br />
-This is very useful plugin for websites, communities that use facebook.<br />
-For more information visit <a href="http://arturssmirnovs.com/" target="_blank">my website</a>.</p>
-<form method="post" action="options.php">
-<?php settings_fields( 'facebook-like-box-settings' ); ?>
-<?php do_settings_sections( 'facebook-like-box-settings' ); ?>
-<h3>Like Box Settings</h3>
+<?php $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'main';  ?>
+
+<h2 class="nav-tab-wrapper">  
+<a href="?page=facebook-like-box-pop-up/facebook-like-box.php&tab=main" class="nav-tab <?php echo $active_tab == 'main' ? 'nav-tab-active' : ''; ?>">Main Settings</a>  
+<a href="?page=facebook-like-box-pop-up/facebook-like-box.php&tab=view" class="nav-tab <?php echo $active_tab == 'view' ? 'nav-tab-active' : ''; ?>">View Settings</a>  
+<a href="?page=facebook-like-box-pop-up/facebook-like-box.php&tab=mobile" class="nav-tab <?php echo $active_tab == 'mobile' ? 'nav-tab-active' : ''; ?>">Mobile Settings</a>  
+<a href="?page=facebook-like-box-pop-up/facebook-like-box.php&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode</a>  
+<a href="http://arturssmirnovs.com/" target="_blank" class="nav-tab">About Plugin</a>  
+</h2>  
+
+<form method="post" action="options.php">  
+	<?php settings_errors(); ?>
+    <?php if( $active_tab == 'main' ) { ?>
+	
+		<?php settings_fields( 'facebook-like-box-settings-main' ); ?>
+		<?php do_settings_sections( 'facebook-like-box-settings-main' ); ?>
+		
+<h3>Facebook Like Box Main Settings</h3>
 <table class="form-table">
 <tr valign="top">
 <th scope="row">Facebook Page Title</th>
@@ -137,8 +148,19 @@ For more information visit <a href="http://arturssmirnovs.com/" target="_blank">
 <td><input type="text" name="facebook_like_box_appid" value="<?php echo get_option('facebook_like_box_appid'); ?>" /></td>
 </tr>
 </table>
-<h3>Like Box View Settings</h3>
+
+	<?php } else if( $active_tab == 'view' ) { ?>
+	
+		<?php settings_fields( 'facebook-like-box-settings-view' ); ?>
+		<?php do_settings_sections( 'facebook-like-box-settings-view' ); ?>
+		
+<h3>Facebook Like Box View Settings</h3>
 <table class="form-table">
+<tr valign="top">
+<th scope="row">Like Box</th>
+<td><fieldset><label title="Enable"><input type="radio" name="facebook_like_box_settings_show" value="yes" <?php if ('yes'==get_option('facebook_like_box_settings_show')) echo 'checked="checked"'; ?>>Show</label><br /><label title="Disable"><input type="radio" name="facebook_like_box_settings_show" value="no" <?php if ('no'==get_option('facebook_like_box_settings_show')) echo 'checked="checked"'; ?>>Hide</label><br /></fieldset>
+<p class="description">Show or hide facebook like box on all pages as alternative use <a href="?page=facebook-like-box-pop-up/facebook-like-box.php&tab=shortcode">shortcode</a>.</p></td>
+</tr>
 <tr valign="top">
 <th scope="row">Cookies</th>
 <td><fieldset><label title="Enable"><input type="radio" name="facebook_like_box_settings_time_enable" value="yes" <?php if ('yes'==get_option('facebook_like_box_settings_time_enable')) echo 'checked="checked"'; ?>>Enable</label><br /><label title="Disable"><input type="radio" name="facebook_like_box_settings_time_enable" value="no" <?php if ('no'==get_option('facebook_like_box_settings_time_enable')) echo 'checked="checked"'; ?>>Disable</label><br /></fieldset></td>
@@ -152,7 +174,13 @@ For more information visit <a href="http://arturssmirnovs.com/" target="_blank">
 <td><fieldset><label title="Show"><input type="radio" name="facebook_like_box_settings_overlay" value="yes" <?php if ('yes'==get_option('facebook_like_box_settings_overlay')) echo 'checked="checked"'; ?>>Enable</label><br /><label title="Hide"><input type="radio" name="facebook_like_box_settings_overlay" value="no" <?php if ('no'==get_option('facebook_like_box_settings_overlay')) echo 'checked="checked"'; ?>>Disable</label><br /></fieldset></td>
 </tr>
 </table>
-<h3>Like Box Settings Mobile</h3>
+
+	<?php } else if( $active_tab == 'mobile' ) { ?>
+	
+		<?php settings_fields( 'facebook-like-box-settings-mobile' ); ?>
+		<?php do_settings_sections( 'facebook-like-box-settings-mobile' ); ?>
+		
+<h3>Facebook Like Box Mobile Settings</h3>
 <table class="form-table">
 <tr valign="top">
 <th scope="row">On mobile</th>
@@ -167,9 +195,26 @@ For more information visit <a href="http://arturssmirnovs.com/" target="_blank">
 <td><input type="text" name="facebook_like_box_settings_mobile_height" value="<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>" />px</td>
 </tr>
 </table>
-<?php submit_button(); ?>
+	<?php } else if( $active_tab == 'shortcode' ) { ?>
+	
+<h3>Facebook Like Box Shortcode</h3>
+<p>You can use facebook like box shortcode to show like box on pages you want.<br />
+You simply have to disable facebook like box on view tab and add shortcode on pages you want like box to show up.<br />
+Shortcode will use all the settings you have specified.<br /> 
+Facebook like box shortcode: <b>[facebook_like_box]</b></p>
+	
+	<?php } ?>
+	
+	<?php if( $active_tab !== 'shortcode' ) { submit_button(); } ?>  
+	
 </form>
-</div><?php
+</div>
+
+<?php
+
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have permissions to access this page.' ) );
+	}
 
 }
 
@@ -190,21 +235,47 @@ function facebook_like_box_styles() {
 }
 
 function facebook_like_box_show() { // Facebook like box show
-	if (!isset($_COOKIE["fblb"]) || get_option('facebook_like_box_settings_time_enable') == 'no') {
-		if (get_option('facebook_like_box_settings_mobile') == 'false' && wp_is_mobile()) { exit; }
-		if (get_option('facebook_like_box_settings_time_enable') == 'yes') {
-			setcookie("fblb", "yes", time() + get_option('facebook_like_box_settings_time'), "/", "", "0");
+
+	if (get_option('facebook_like_box_settings_show') == 'yes') {
+		if ((get_option('facebook_like_box_settings_mobile') == 'false' && wp_is_mobile()) == false) {
+			if (!isset($_COOKIE["fblb"]) || get_option('facebook_like_box_settings_time_enable') == 'no') {
+				if (get_option('facebook_like_box_settings_time_enable') == 'yes') {
+					setcookie("fblb", "yes", time() + get_option('facebook_like_box_settings_time'), "/", "", "0");
+				}
+				if (get_option('facebook_like_box_settings_overlay') == 'yes') { ?> <div class="fb_overlay"></div> <?php } ?>
+				<div id="fb_box" class="<?php echo get_option('facebook_like_box_colorscheme'); ?>"><?php
+				if (wp_is_mobile()) { // settings for mobile deveice
+				?><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<?php echo get_option('facebook_like_box_title'); ?>&amp;width=<?php echo get_option('facebook_like_box_settings_mobile_width'); ?>&amp;height=<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>&amp;colorscheme=<?php echo get_option('facebook_like_box_colorscheme'); ?>&amp;show_faces=<?php echo get_option('facebook_like_box_faces'); ?>&amp;header=<?php echo get_option('facebook_like_box_header'); ?>&amp;stream=<?php echo get_option('facebook_like_box_steam'); ?>&amp;show_border=<?php echo get_option('facebook_like_box_border'); ?>&amp;appId=<?php echo get_option('facebook_like_box_appid'); ?>" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?php echo get_option('facebook_like_box_settings_mobile_width'); ?>px; height:<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>px;" allowTransparency="true"></iframe><?php
+				} else { // settings for desktop deveice
+				?><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<?php echo get_option('facebook_like_box_title'); ?>&amp;width=<?php echo get_option('facebook_like_box_width'); ?>&amp;height=<?php echo get_option('facebook_like_box_height'); ?>&amp;colorscheme=<?php echo get_option('facebook_like_box_colorscheme'); ?>&amp;show_faces=<?php echo get_option('facebook_like_box_faces'); ?>&amp;header=<?php echo get_option('facebook_like_box_header'); ?>&amp;stream=<?php echo get_option('facebook_like_box_steam'); ?>&amp;show_border=<?php echo get_option('facebook_like_box_border'); ?>&amp;appId=<?php echo get_option('facebook_like_box_appid'); ?>" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?php echo get_option('facebook_like_box_width'); ?>px; height:<?php echo get_option('facebook_like_box_height'); ?>px;" allowTransparency="true"></iframe><?php
+				}
+				?><a id="fb_box_close"><img src="<?php echo plugins_url('images/close.png', __FILE__); ?>" alt="Close"></a>
+				</div><?php
+			}
 		}
-		if (get_option('facebook_like_box_settings_overlay') == 'yes') { ?> <div class="fb_overlay"></div> <?php } ?>
-		<div id="fb_box" class="<?php echo get_option('facebook_like_box_colorscheme'); ?>"><?php
-		if (wp_is_mobile()) { // settings for mobile deveice
-		?><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<?php echo get_option('facebook_like_box_title'); ?>&amp;width=<?php echo get_option('facebook_like_box_settings_mobile_width'); ?>&amp;height=<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>&amp;colorscheme=<?php echo get_option('facebook_like_box_colorscheme'); ?>&amp;show_faces=<?php echo get_option('facebook_like_box_faces'); ?>&amp;header=<?php echo get_option('facebook_like_box_header'); ?>&amp;stream=<?php echo get_option('facebook_like_box_steam'); ?>&amp;show_border=<?php echo get_option('facebook_like_box_border'); ?>&amp;appId=<?php echo get_option('facebook_like_box_appid'); ?>" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?php echo get_option('facebook_like_box_settings_mobile_width'); ?>px; height:<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>px;" allowTransparency="true"></iframe><?php
-		} else { // settings for desktop deveice
-		?><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<?php echo get_option('facebook_like_box_title'); ?>&amp;width=<?php echo get_option('facebook_like_box_width'); ?>&amp;height=<?php echo get_option('facebook_like_box_height'); ?>&amp;colorscheme=<?php echo get_option('facebook_like_box_colorscheme'); ?>&amp;show_faces=<?php echo get_option('facebook_like_box_faces'); ?>&amp;header=<?php echo get_option('facebook_like_box_header'); ?>&amp;stream=<?php echo get_option('facebook_like_box_steam'); ?>&amp;show_border=<?php echo get_option('facebook_like_box_border'); ?>&amp;appId=<?php echo get_option('facebook_like_box_appid'); ?>" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?php echo get_option('facebook_like_box_width'); ?>px; height:<?php echo get_option('facebook_like_box_height'); ?>px;" allowTransparency="true"></iframe><?php
-		}
-		?><a id="fb_box_close"><img src="<?php echo plugins_url('images/close.png', __FILE__); ?>" alt="Close"></a>
-		</div><?php
 	}
+
+}
+
+function facebook_like_box_shortcode() { // Facebook like box shortcode
+
+	if ((get_option('facebook_like_box_settings_mobile') == 'false' && wp_is_mobile()) == false) {
+		if (!isset($_COOKIE["fblb"]) || get_option('facebook_like_box_settings_time_enable') == 'no') {
+			if (get_option('facebook_like_box_settings_time_enable') == 'yes') {
+				setcookie("fblb", "yes", time() + get_option('facebook_like_box_settings_time'), "/", "", "0");
+			}
+			if (get_option('facebook_like_box_settings_overlay') == 'yes') { ?> <div class="fb_overlay"></div> <?php } ?>
+			<div id="fb_box" class="<?php echo get_option('facebook_like_box_colorscheme'); ?>"><?php
+			if (wp_is_mobile()) { // settings for mobile deveice
+			?><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<?php echo get_option('facebook_like_box_title'); ?>&amp;width=<?php echo get_option('facebook_like_box_settings_mobile_width'); ?>&amp;height=<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>&amp;colorscheme=<?php echo get_option('facebook_like_box_colorscheme'); ?>&amp;show_faces=<?php echo get_option('facebook_like_box_faces'); ?>&amp;header=<?php echo get_option('facebook_like_box_header'); ?>&amp;stream=<?php echo get_option('facebook_like_box_steam'); ?>&amp;show_border=<?php echo get_option('facebook_like_box_border'); ?>&amp;appId=<?php echo get_option('facebook_like_box_appid'); ?>" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?php echo get_option('facebook_like_box_settings_mobile_width'); ?>px; height:<?php echo get_option('facebook_like_box_settings_mobile_height'); ?>px;" allowTransparency="true"></iframe><?php
+			} else { // settings for desktop deveice
+			?><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<?php echo get_option('facebook_like_box_title'); ?>&amp;width=<?php echo get_option('facebook_like_box_width'); ?>&amp;height=<?php echo get_option('facebook_like_box_height'); ?>&amp;colorscheme=<?php echo get_option('facebook_like_box_colorscheme'); ?>&amp;show_faces=<?php echo get_option('facebook_like_box_faces'); ?>&amp;header=<?php echo get_option('facebook_like_box_header'); ?>&amp;stream=<?php echo get_option('facebook_like_box_steam'); ?>&amp;show_border=<?php echo get_option('facebook_like_box_border'); ?>&amp;appId=<?php echo get_option('facebook_like_box_appid'); ?>" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?php echo get_option('facebook_like_box_width'); ?>px; height:<?php echo get_option('facebook_like_box_height'); ?>px;" allowTransparency="true"></iframe><?php
+			}
+			?><a id="fb_box_close"><img src="<?php echo plugins_url('images/close.png', __FILE__); ?>" alt="Close"></a>
+			</div><?php
+		}
+	}
+	
 }
 
 register_activation_hook( __FILE__, 'facebook_like_box_activate' ); //register activation hook
@@ -213,5 +284,6 @@ add_action('admin_menu', 'facebook_like_box_admin_menu'); //add facebook like bo
 add_action('wp_enqueue_scripts', 'facebook_like_box_scripts'); //add facebook like box scripts
 add_action('wp_head', 'facebook_like_box_styles'); //add facebook like box styles to head
 add_action( 'get_footer', 'facebook_like_box_show'); //add facebook like box to footer
+add_shortcode( 'facebook_like_box', 'facebook_like_box_shortcode' ); //add shortcode
 
 ?>
