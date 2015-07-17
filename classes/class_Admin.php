@@ -367,10 +367,10 @@ class FacebookLikeBoxPopUpAdmin
     public function flbpp_href_cb()
     {
     	printf(
-    			'<input type="text" id="href" name="flbpp_settings[href]" value="%s" />',
+    			'https://www.facebook.com/<input type="text" id="href" name="flbpp_settings[href]" value="%s" />/',
     			isset( $this->options['href'] ) ? esc_attr( $this->options['href']) : ''
     	);
-    	?><p class="description"><?php print __("The URL of the Facebook Page.", "facebook-like-box-pop-up"); ?></p><?php
+    	?><p class="description"><?php print __("The the Facebook Page ID.", "facebook-like-box-pop-up"); ?></p><?php
     	
     }
 
@@ -453,7 +453,7 @@ class FacebookLikeBoxPopUpAdmin
     {
     	printf('<select name="flbpp_settings[cover]">
     		<option value="true" '.selected( $this->options["cover"], "true", false ).'>'.__("Enable", "facebook-like-box-pop-up").'</option>
-    	    <option value="" '.selected( $this->options["cover"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
+    	    <option value="false" '.selected( $this->options["cover"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
     	</select>');
     	?><p class="description"><?php print __("Enable/disable cover photo in the header", "facebook-like-box-pop-up"); ?></p><?php
     }
@@ -465,7 +465,7 @@ class FacebookLikeBoxPopUpAdmin
     {
     	printf('<select name="flbpp_settings[faces]">
     		<option value="true" '.selected( $this->options["faces"], "true", false ).'>'.__("Enable", "facebook-like-box-pop-up").'</option>
-    	    <option value="" '.selected( $this->options["faces"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
+    	    <option value="false" '.selected( $this->options["faces"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
     	</select>');
     	?><p class="description"><?php print __("Enable/disable profile photos when friends like this", "facebook-like-box-pop-up"); ?></p><?php
     }
@@ -478,7 +478,7 @@ class FacebookLikeBoxPopUpAdmin
     {
     	printf('<select name="flbpp_settings[posts]">
     		<option value="true" '.selected( $this->options["posts"], "true", false ).'>'.__("Enable", "facebook-like-box-pop-up").'</option>
-    	    <option value="" '.selected( $this->options["posts"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
+    	    <option value="false" '.selected( $this->options["posts"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
     	</select>');
     	?><p class="description"><?php print __("Enable/disable posts from the Page's timeline.", "facebook-like-box-pop-up"); ?></p><?php
     }
@@ -490,7 +490,7 @@ class FacebookLikeBoxPopUpAdmin
     {
     	printf('<select name="flbpp_settings[call]">
     		<option value="true" '.selected( $this->options["call"], "true", false ).'>'.__("Enable", "facebook-like-box-pop-up").'</option>
-    	    <option value="" '.selected( $this->options["call"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
+    	    <option value="false" '.selected( $this->options["call"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
     	</select>');
     	?><p class="description"><?php print __("Enable/disable the custom call to action button (if available)", "facebook-like-box-pop-up"); ?></p><?php
     }
@@ -502,7 +502,7 @@ class FacebookLikeBoxPopUpAdmin
     {
     	printf('<select name="flbpp_settings[smallheader]">
     		<option value="true" '.selected( $this->options["smallheader"], "true", false ).'>'.__("Enable", "facebook-like-box-pop-up").'</option>
-    	    <option value="" '.selected( $this->options["smallheader"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
+    	    <option value="false" '.selected( $this->options["smallheader"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
     	</select>');
     	?><p class="description"><?php print __("Enable/disable the small header instead", "facebook-like-box-pop-up"); ?></p><?php
     }
@@ -514,7 +514,7 @@ class FacebookLikeBoxPopUpAdmin
     {
     	printf('<select name="flbpp_settings[adapt]">
     		<option value="true" '.selected( $this->options["adapt"], "true", false ).'>'.__("Enable", "facebook-like-box-pop-up").'</option>
-    	    <option value="" '.selected( $this->options["adapt"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
+    	    <option value="false" '.selected( $this->options["adapt"], "", false ).'>'.__("Disable", "facebook-like-box-pop-up").'</option>
     	</select>');
     	?><p class="description"><?php print __("Enable/disable fit inside the container width", "facebook-like-box-pop-up"); ?></p><?php
     }
