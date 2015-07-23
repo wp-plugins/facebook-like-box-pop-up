@@ -220,7 +220,7 @@ class FacebookLikeBoxPopUp
 	 */
 	public static function getEmplyData ($replaceData, $originalData)
 	{
-		$returnData = [];
+		$returnData = array();
 		foreach ($originalData as $kay => $value)
 		{
 			if (isset($replaceData[$kay]) && $replaceData[$kay])
